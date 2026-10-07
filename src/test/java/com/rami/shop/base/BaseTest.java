@@ -1,14 +1,12 @@
 package com.rami.shop.base;
 
+import com.rami.shop.pages.DeleteAccountPage;
 import com.rami.shop.pages.HomePage;
 import com.rami.shop.pages.SignupLoginPage;
 import com.rami.shop.pages.SignupPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import static com.rami.shop.base.BasePage.delay;
 
@@ -19,10 +17,11 @@ public class BaseTest {
     protected static HomePage  homePage;
     protected static SignupLoginPage signupLoginPage;
     protected static SignupPage signupPage;
+    protected static DeleteAccountPage deleteAccountPage;
 
     private String url = "https://automationexercise.com/";
 
-    @BeforeSuite
+    @BeforeMethod
     public void setUp() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -35,7 +34,7 @@ public class BaseTest {
     }
 
 
-    @AfterSuite
+    @AfterMethod
     public void teardown() {
         delay(4000);
         driver.quit();

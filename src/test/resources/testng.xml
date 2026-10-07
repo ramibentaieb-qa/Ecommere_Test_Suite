@@ -1,13 +1,8 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Automation Exercise Suite" preserve-order="true">
+<suite name="Automation Exercise Suite">
     <test name="User Journey Tests">
     <classes>
-        <!--  Runs first -->
         <class name="com.rami.shop.tests.signup.SignupTest"/>
-        <!-- Runs second, in  the same browser -->
-        <class name="com.rami.shop.tests.login.LogoutTest"/>
-        <!-- Runs third, in  the same browser -->
-        <class name="com.rami.shop.tests.login.LoginTest"/>
     </classes>
     </test>
 </suite>

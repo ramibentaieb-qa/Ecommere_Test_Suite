@@ -7,7 +7,7 @@ public class HomePage  extends BasePage {
 
 private By signupLoginButton = By.cssSelector("a[href='/login']");
 private By logoutButton = By.cssSelector("a[href='/logout']");
-
+private By deleteAcountButton = By.cssSelector("a[href='/delete_account']");
 
 public SignupLoginPage goToSignupPage() {
     click(signupLoginButton);
@@ -19,9 +19,16 @@ public SignupLoginPage logoutToSignupPage() {
     return new SignupLoginPage();
 }
 
+public DeleteAccountPage goToDeleteAccountPage() {
+    click(deleteAcountButton);
+    return new DeleteAccountPage();
+}
+
 public String getLogoutText() {
     return find(logoutButton).getText();
 }
+
+
 
 
 

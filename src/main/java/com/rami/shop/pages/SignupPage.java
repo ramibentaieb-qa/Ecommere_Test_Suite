@@ -152,7 +152,7 @@ public void setAddress2Field(String address2) {
 
 public void selectCountryDropDown(String country) {
     scrollToElementJS(countryDropDwn);
-    clickJs(countryDropDwn);
+    selectByText(countryDropDwn, country);
 }
 
 public void setStateField(String state) {

@@ -1,8 +1,8 @@
 package com.rami.shop.utils;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.rami.shop.models.SignupData;
-import org.openqa.selenium.json.TypeToken;
 import org.testng.annotations.DataProvider;
 
 import java.io.InputStream;
