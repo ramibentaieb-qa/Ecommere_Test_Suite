@@ -87,7 +87,7 @@ public class SignupTest extends BaseTest {
 //Step 4: Delete Account
 
         Assert.assertEquals(deleteAccountPage.getAccountDeletedText(),
-                "Account Deleted!", "Your account has not been deleted!");
+                "ACCOUNT DELETED!", "Your account has not been deleted!");
 
         deleteAccountPage.clickContinueButton();
 

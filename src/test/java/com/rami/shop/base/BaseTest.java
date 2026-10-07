@@ -31,6 +31,7 @@ public class BaseTest {
         homePage = new HomePage();
         signupLoginPage = new SignupLoginPage();
         signupPage = new SignupPage();
+        deleteAccountPage = new DeleteAccountPage();
     }
 
 
