@@ -1,42 +1,54 @@
 package com.rami.shop.tests.signup;
 
 import com.rami.shop.base.BaseTest;
+import com.rami.shop.models.AddressData;
+import com.rami.shop.models.SignupData;
 import com.rami.shop.pages.accountCreatedPage;
+import com.rami.shop.utils.TestDataProviders;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
 public class SignupTest extends BaseTest {
 
-    @Test
-    public void testSignup() {
-        String day = "1";
-        String month = "2";
-        String year = "1992";
-        String countryName = "Canada";
+    @Test(dataProvider = "signupDataProvider", dataProviderClass = TestDataProviders.class)
+    public void testSignup(SignupData data) {
+//        String day = (dataAddress.day);
+//        String month = (dataAddress.month);
+//        String year = (dataAddress.year);
+//        String countryName = (dataAddress.country);
 
 
         homePage.goToSignupPage();
-        signupLoginPage.setUsername("wee");
-        signupLoginPage.setEmail("wee@tester.com");
+        signupLoginPage.setUsername(data.username);
+        signupLoginPage.setEmail((data.email));
         signupLoginPage.clickSignupButton();
 
-        signupPage.ClickMaleRadioButton();
-        signupPage.setPassword("wee123");
-        signupPage.selectDayDropDown(day);
-        signupPage.selectMonthDropDown(month);
-        signupPage.selectYearDropDown(year);
-        signupPage.clickNewsletterCheckbox();
-        signupPage.clickSpecialOffersCheckbox();
-        signupPage.setFirstNameField("aymen");
-        signupPage.setLastNameField("the tester");
-        signupPage.setCompanyField("Tester");
-        signupPage.setAddress1Field("123 street");
-        signupPage.selectCountryDropDown(countryName);
-        signupPage.setStateField("BC");
-        signupPage.setCityField("Vancover");
-        signupPage.setZipCodeField("12345");
-        signupPage.setMobileNumberField("225588996633");
+//        signupPage.ClickMaleRadioButton();
+        if ("male".equalsIgnoreCase(data.gender)) {
+            signupPage.ClickMaleRadioButton();
+        } else {
+            signupPage.ClickFemalesRadioButton();
+        }
+
+        signupPage.setPassword(data.password);
+        signupPage.selectDayDropDown(data.day);
+        signupPage.selectMonthDropDown(data.month);
+        signupPage.selectYearDropDown(data.year);
+//        signupPage.clickNewsletterCheckbox();
+//        signupPage.clickSpecialOffersCheckbox();
+        if (data.newsletter) signupPage.clickNewsletterCheckbox();
+        if (data.specialOffers) signupPage.clickSpecialOffersCheckbox();
+
+        signupPage.setFirstNameField(data.address.firstName);
+        signupPage.setLastNameField(data.address.lastName);
+        signupPage.setCompanyField(data.address.company);
+        signupPage.setAddress1Field(data.address.address1);
+        signupPage.selectCountryDropDown(data.address.country);
+        signupPage.setStateField(data.address.state);
+        signupPage.setCityField(data.address.city);
+        signupPage.setZipCodeField(data.address.zipcode);
+        signupPage.setMobileNumberField(data.address.mobileNumber);
         System.out.println("Current Page Title: " + driver.getTitle());
 //        signupPage.clickCreateAccountButton();
 

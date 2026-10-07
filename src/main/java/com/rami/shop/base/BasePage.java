@@ -33,8 +33,8 @@ public class BasePage {
     public static void delay(int milliseconds) {
         try {
             Thread.sleep(milliseconds);
-        } catch (InterruptedException exception) {
-            exception.printStackTrace();
+        } catch (InterruptedException exc) {
+            exc.printStackTrace();
         }
     }
 
