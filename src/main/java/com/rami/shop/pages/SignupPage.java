@@ -89,31 +89,15 @@ public void selectDayDropDown(String day) {
     selectByValue(dayDropDown, day);
 }
 
-public void clickDay(String day) {
-    click(dayValue(day));
-}
-
-
-
 public void selectMonthDropDown(String month) {
       scrollToElementJS(monthDropDown);
       selectByValue(monthDropDown, month);
 }
 
-public void clickMonth(String month) {
-      click(monthValue(month));
-}
-
-
 public void selectYearDropDown(String year) {
        scrollToElementJS(yearDropDown);
        selectByValue(yearDropDown, year);
 }
-
-public void clickYear(String year) {
-      click(yearValue(year));
-}
-
 
 //Methods for checkbox
 public void clickNewsletterCheckbox() {
@@ -169,11 +153,6 @@ public void setAddress2Field(String address2) {
 public void selectCountryDropDown(String country) {
     scrollToElementJS(countryDropDwn);
     clickJs(countryDropDwn);
-}
-
-public void setCountryValue(String country) {
-    scrollToElementJS(countryDropDwn);
-    click(countryValue(country));
 }
 
 public void setStateField(String state) {
