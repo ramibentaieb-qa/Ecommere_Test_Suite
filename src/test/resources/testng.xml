@@ -1,8 +1,9 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Automation Exercise Suite">
+<suite name="Automation Exercise Suite" preserve-order="true">
     <test name="User Journey Tests">
     <classes>
         <class name="com.rami.shop.tests.signup.SignupTest"/>
+        <class name="com.rami.shop.tests.products.ProductTest"/>
     </classes>
     </test>
 </suite>

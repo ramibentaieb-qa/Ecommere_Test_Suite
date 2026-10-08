@@ -8,6 +8,8 @@ public class HomePage  extends BasePage {
 private By signupLoginButton = By.cssSelector("a[href='/login']");
 private By logoutButton = By.cssSelector("a[href='/logout']");
 private By deleteAcountButton = By.cssSelector("a[href='/delete_account']");
+private By usernameText = By.xpath("//a[contains(text(), 'Logged in as')]/b");
+private By productButton =  By.cssSelector("a[href='/products']");
 
 public SignupLoginPage goToSignupPage() {
     click(signupLoginButton);
@@ -28,7 +30,15 @@ public String getLogoutText() {
     return find(logoutButton).getText();
 }
 
+public String getUsernameText() {
+    return find(usernameText).getText();
+}
 
+
+public ProductsPage goToProductsPage() {
+    click(productButton);
+    return new ProductsPage();
+}
 
 
 

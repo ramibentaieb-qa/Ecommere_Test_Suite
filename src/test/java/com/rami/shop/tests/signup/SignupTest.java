@@ -17,6 +17,9 @@ public class SignupTest extends BaseTest {
       String email = System.currentTimeMillis() + "_" + data.email;
       String password = System.currentTimeMillis() + "_" + data.password;
 
+      createdEmail = email;
+      createdPassword = password;
+
 //Step 1: Signup
         homePage.goToSignupPage();
         signupLoginPage.setUsername(data.username);
@@ -64,7 +67,6 @@ public class SignupTest extends BaseTest {
         accountCreatedPage.clickContinueButton();
 
 
-
 //Step 2: Logout
 
         homePage.logoutToSignupPage();
@@ -72,24 +74,26 @@ public class SignupTest extends BaseTest {
                 "After logout we should be on the login page");
 
 
-
 //Ste 3: Login
 
-        signupLoginPage.setLoginEmail(email);
-        signupLoginPage.setPassword(password);
-        signupLoginPage.loginToHomePage();
-        Assert.assertEquals(homePage.getLogoutText(),
-                "Logout", "You are not logged in!");
+//        signupLoginPage.setLoginEmail(email);
+//        signupLoginPage.setPassword(password);
+//        signupLoginPage.loginToHomePage();
+//        Assert.assertEquals(homePage.getLogoutText(),
+//                "Logout", "You are not logged in!");
 
-        homePage.goToDeleteAccountPage();
+//      Assert.assertTrue(homePage.getUsernameText().contains(data.username),
+//              "Are you sure you are logged in?");
+
+//        homePage.goToDeleteAccountPage();
 
 
 //Step 4: Delete Account
 
-        Assert.assertEquals(deleteAccountPage.getAccountDeletedText(),
-                "ACCOUNT DELETED!", "Your account has not been deleted!");
-
-        deleteAccountPage.clickContinueButton();
+//        Assert.assertEquals(deleteAccountPage.getAccountDeletedText(),
+//                "ACCOUNT DELETED!", "Your account has not been deleted!");
+//
+//        deleteAccountPage.clickContinueButton();
 
     }
 

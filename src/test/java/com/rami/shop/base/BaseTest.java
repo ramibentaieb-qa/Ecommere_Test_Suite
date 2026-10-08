@@ -1,9 +1,6 @@
 package com.rami.shop.base;
 
-import com.rami.shop.pages.DeleteAccountPage;
-import com.rami.shop.pages.HomePage;
-import com.rami.shop.pages.SignupLoginPage;
-import com.rami.shop.pages.SignupPage;
+import com.rami.shop.pages.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
@@ -18,6 +15,11 @@ public class BaseTest {
     protected static SignupLoginPage signupLoginPage;
     protected static SignupPage signupPage;
     protected static DeleteAccountPage deleteAccountPage;
+    protected static ProductsPage productsPage;
+    protected static CartPage cartPage;
+
+    protected static String createdEmail;
+    protected static String createdPassword;
 
     private String url = "https://automationexercise.com/";
 
@@ -32,6 +34,8 @@ public class BaseTest {
         signupLoginPage = new SignupLoginPage();
         signupPage = new SignupPage();
         deleteAccountPage = new DeleteAccountPage();
+        productsPage = new ProductsPage();
+        cartPage = new CartPage();
     }
 
 

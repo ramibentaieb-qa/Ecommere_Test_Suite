@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 public class DeleteAccountPage extends BasePage {
 
     private By accountDeletedText = By.xpath("//h2[@data-qa='account-deleted']");
-    protected By continueButton = By.xpath("//a[@data-qa='continue-button']");
+    private By continueButton = By.xpath("//a[@data-qa='continue-button']");
 
 
     public String getAccountDeletedText() {
