@@ -9,7 +9,7 @@ public class JavaScriptUtility extends Utility{
 
     public static void scrollToElementJS(By locator){
         WebElement element  = BasePage.getDriver().findElement(locator);
-        String jsScript = "arguments[0].scrollIntoView({behavior: 'instant', block: 'center'});";
+        String jsScript = "arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});";
         ((JavascriptExecutor) BasePage.getDriver()).executeScript(jsScript, element);
 
     }

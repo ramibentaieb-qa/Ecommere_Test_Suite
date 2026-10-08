@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 public class ProductTest extends BaseTest {
 
-    @Test(dependsOnMethods = "testSignupLogoutLogin")
+    @Test(dependsOnMethods = "com.rami.shop.tests.signup.SignupTest.testSignupLogoutLogin")
     public void addToCartTest() {
 
         homePage.goToSignupPage();
@@ -20,9 +20,14 @@ public class ProductTest extends BaseTest {
 
         homePage.goToProductsPage();
         productsPage.addProductToCart(7);
+        String ActualModalText = productsPage.getModalTitle();
+        Assert.assertEquals(
+                ActualModalText, "Added!"
+        );
+        System.out.println(productsPage.getModalTitle());
+
+        productsPage.clickContinueShoppingButton();
         productsPage.addProductToCart(8);
-        Assert.assertEquals(productsPage.getModalTitle(),
-                "Added!", "Product is not added!");
         productsPage.clickContinueShoppingButton();
         productsPage.clickCartButton();
 
