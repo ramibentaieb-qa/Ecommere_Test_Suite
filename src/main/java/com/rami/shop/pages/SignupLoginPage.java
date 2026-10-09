@@ -12,6 +12,8 @@ public class SignupLoginPage extends BasePage {
     private By passwordField = By.xpath("//input[@data-qa='login-password']");
     private By loginButton = By.xpath("//button[@data-qa='login-button']");
 
+    private By errorLoginMessage = By.cssSelector("form[action='/login']  p");
+
     private By SignupText = By.className("signup-form");
 
 
@@ -42,6 +44,10 @@ public class SignupLoginPage extends BasePage {
     public HomePage loginToHomePage() {
         click(loginButton);
         return new HomePage();
+    }
+
+    public String getErrorLoginMessage() {
+        return find(errorLoginMessage).getText();
     }
 
 

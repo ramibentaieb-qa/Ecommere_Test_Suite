@@ -3,6 +3,7 @@ package com.rami.shop.pages;
 import com.rami.shop.base.BasePage;
 import org.openqa.selenium.By;
 
+import static utilities.JavaScriptUtility.clickJs;
 import static utilities.JavaScriptUtility.scrollToElementJS;
 
 public class ProductsPage extends BasePage {
@@ -25,7 +26,7 @@ public class ProductsPage extends BasePage {
 
     public void addProductToCart(int productId) {
         scrollToElementJS(addToCartButton(productId));
-        click(addToCartButton(productId));
+        clickJs(addToCartButton(productId));
         delay(2000);
     }
 
