@@ -39,6 +39,14 @@ public class ProductTest extends BaseTest {
 
 
 
+        Assert.assertEquals(cartPage.getEmptyCartText(),
+                "Cart is empty!", "You are not on empty cart page");
+        cartPage.clickBackToProductsButton();
+
+        Assert.assertTrue(driver.getCurrentUrl().contains("/products"),
+                "you are not redirected back to products page");
+
+
 
 
 

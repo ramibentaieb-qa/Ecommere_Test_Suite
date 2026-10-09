@@ -14,7 +14,7 @@ public class ProductsPage extends BasePage {
     }
     private By modalTitle = By.xpath("//h4[contains(text(), 'Added!')]");
     private By continueShoppingButton = By.cssSelector("button[data-dismiss='modal']");
-    private By cartButton = By.cssSelector("a[href='+/view_cart']");
+    private By cartButton = By.cssSelector("a[href='/view_cart']");
 
 
 
@@ -25,8 +25,8 @@ public class ProductsPage extends BasePage {
 
     public void addProductToCart(int productId) {
         scrollToElementJS(addToCartButton(productId));
-        delay(3000);
         click(addToCartButton(productId));
+        delay(2000);
     }
 
     public String getModalTitle() {
@@ -35,9 +35,11 @@ public class ProductsPage extends BasePage {
 
     public void clickContinueShoppingButton() {
         click(continueShoppingButton);
+        delay(2000);
     }
 
     public CartPage clickCartButton() {
+        scrollToElementJS(cartButton);
         click(cartButton);
         return new CartPage();
     }

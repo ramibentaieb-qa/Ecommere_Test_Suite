@@ -13,6 +13,10 @@ public class CartPage extends BasePage {
     private By deleteProductButton(int productId) {
         return By.cssSelector(".cart_delete a[data-product-id='" + productId + "']");
     }
+    private By emptyCartText = By.cssSelector("span[id='empty_cart'] b");
+    private By backToProductsButton = By.cssSelector("#empty_cart a[href='/products']");
+
+
 
 
     public String getShoppingCartTitle() {
@@ -25,6 +29,16 @@ public class CartPage extends BasePage {
 
     public void deleteProductFromCart(int productId) {
         click(deleteProductButton(productId));
+    }
+
+    public String getEmptyCartText() {
+        delay(2000);
+        return find(emptyCartText).getText();
+    }
+
+    public ProductsPage clickBackToProductsButton() {
+        click(backToProductsButton);
+        return new ProductsPage();
     }
 
 
