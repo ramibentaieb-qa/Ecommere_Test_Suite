@@ -18,7 +18,7 @@ public class ProductsPage extends BasePage {
     private By continueShoppingButton = By.cssSelector("button[data-dismiss='modal']");
     private By cartButton = By.cssSelector("a[href='/view_cart']");
     private By viewProductButton(int productDetailsId) {
-        return By.cssSelector("a[href='/product_details/'" + productDetailsId + "']");
+        return By.cssSelector("a[href='/product_details/" + productDetailsId + "']");
     }
 
 

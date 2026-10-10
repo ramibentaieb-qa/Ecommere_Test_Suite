@@ -14,7 +14,7 @@ public class CheckoutTest extends BaseTest {
 
     private static final String EXISTING_EMAIL  = "michele@test.com";
     private static final String EXISTING_PASSWORD  = "Michele123";
-    int quantity = 2;
+    int quantity = 5;
 
     @BeforeMethod
     public void prepareCart() {
@@ -23,14 +23,14 @@ public class CheckoutTest extends BaseTest {
         signupLoginPage.setPassword(EXISTING_PASSWORD);
         signupLoginPage.loginToHomePage();
         homePage.goToProductsPage();
-        productsPage.navigateToProductDetails(1);
+        productsPage.navigateToProductDetails(3);
         productDetailsPage.setQuantity(quantity);
         Assert.assertEquals(productDetailsPage.getQuantity(), String.valueOf(quantity));
         productDetailsPage.addProductToCart();
         productDetailsPage.navigateToCart();
 
 
-        Assert.assertEquals(cartPage.getQuantity(2),  String.valueOf(quantity));
+        Assert.assertEquals(cartPage.getQuantity(5),  String.valueOf(quantity));
         cartPage.navigateToCheckoutPage();
     }
 

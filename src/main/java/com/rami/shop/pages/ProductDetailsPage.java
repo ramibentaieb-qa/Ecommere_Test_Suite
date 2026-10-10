@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 public class ProductDetailsPage extends BasePage {
 
     private By productImage(int productDetailsId) {
-        return By.cssSelector("img[src='/get_product_picture/'" + productDetailsId + "']");
+        return By.cssSelector("img[src='/get_product_picture/" + productDetailsId + "']");
     }
     private By productName = By.cssSelector(".product-information h2");
     private By productCategory = By.xpath("//div[@class='product-information']/p[contains(text(),'Category:')]");
@@ -51,6 +51,7 @@ public class ProductDetailsPage extends BasePage {
     }
 
     public CartPage navigateToCart() {
+        delay(2000);
         click(viewCartButton);
         return new CartPage();
     }

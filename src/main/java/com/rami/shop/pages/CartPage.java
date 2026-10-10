@@ -3,6 +3,8 @@ package com.rami.shop.pages;
 import com.rami.shop.base.BasePage;
 import org.openqa.selenium.By;
 
+import static utilities.JavaScriptUtility.scrollToElementJS;
+
 public class CartPage extends BasePage {
 
     private By shoppingCartTitle = By.xpath("//li[contains(text(), 'Shopping Cart')]");
@@ -15,8 +17,8 @@ public class CartPage extends BasePage {
     private By backToProductsButton = By.cssSelector("#empty_cart a[href='/products']");
     private By checkoutButton = By.cssSelector("a.check_out");
 
-    private By quantityOf(int productDetailsId) {
-        return By.cssSelector("#product-" + productDetailsId + " .cart_quantity button");
+    private By quantityOf(int productId) {
+        return By.cssSelector("#product-" + productId + " .cart_quantity button");
     }
 
 
@@ -47,6 +49,7 @@ public class CartPage extends BasePage {
     }
 
     public String getQuantity(int productDetailsId) {
+        scrollToElementJS(quantityOf((productDetailsId)));
         return find(quantityOf(productDetailsId)).getText();
     }
 
