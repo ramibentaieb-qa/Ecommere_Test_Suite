@@ -43,7 +43,10 @@ public class CheckoutPage extends BasePage {
         return amountToNumber(find(totalAmountOf).getText());
     }
 
-
+    public PaymentPage navigateToPaymentPage() {
+        click(placeOrderButton);
+        return new PaymentPage();
+    }
 
 
 
