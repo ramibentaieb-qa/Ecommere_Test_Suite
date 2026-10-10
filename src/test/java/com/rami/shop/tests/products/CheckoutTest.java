@@ -26,13 +26,14 @@ public class CheckoutTest extends BaseTest {
         productsPage.addProductToCart(9);
         productsPage.clickContinueShoppingButton();
         productsPage.clickCartButton();
+        cartPage.navigateToCheckoutPage();
     }
 
     @Test(dataProvider = "signupDataProvider",
             dataProviderClass = TestDataProviders.class)
     public void testCheckoutProcess(SignupData data) {
 
-    String title = "male".equalsIgnoreCase(data.gender) ? "Mrs." : "Mrs.";
+    String title = "male".equalsIgnoreCase(data.gender) ? "Mr." : "Mrs.";
 
         List<String> expected = new ArrayList<>();
         expected.add(title + " " + data.address.firstName + " " + data.address.lastName);

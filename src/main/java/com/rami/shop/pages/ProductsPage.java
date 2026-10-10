@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 
 import static utilities.JavaScriptUtility.clickJs;
 import static utilities.JavaScriptUtility.scrollToElementJS;
+import static utilities.WaitUtility.fluentWaitUntilVisible;
 
 public class ProductsPage extends BasePage {
 
@@ -25,7 +26,7 @@ public class ProductsPage extends BasePage {
     }
 
     public void addProductToCart(int productId) {
-        delay(5000);
+        fluentWaitUntilVisible(5, addToCartButton(productId));
         scrollToElementJS(addToCartButton(productId));
         clickJs(addToCartButton(productId));
         delay(2000);

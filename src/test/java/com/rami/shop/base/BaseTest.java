@@ -4,6 +4,7 @@ import com.rami.shop.pages.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
+import utilities.Utility;
 
 import static com.rami.shop.base.BasePage.delay;
 
@@ -31,6 +32,7 @@ public class BaseTest {
         driver.get(url);
         basePage = new BasePage();
         BasePage.setDriver(driver);
+        Utility.setUtilityDriver();
         homePage = new HomePage();
         signupLoginPage = new SignupLoginPage();
         signupPage = new SignupPage();
