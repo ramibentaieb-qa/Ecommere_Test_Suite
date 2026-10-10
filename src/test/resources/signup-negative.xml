@@ -1,8 +1,8 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Automation Exercise Suite">
-    <test name="User Negative Login">
+    <test name="User Negative Signup">
         <classes>
-            <class name="com.rami.shop.tests.signup.NegativeLoginTest"/>
+            <class name="com.rami.shop.tests.signup.NegativeSignupTest"/>
         </classes>
     </test>
 </suite>
