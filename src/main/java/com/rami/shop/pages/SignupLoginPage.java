@@ -50,6 +50,10 @@ public class SignupLoginPage extends BasePage {
         return find(errorLoginMessage).getText();
     }
 
+    public String getEmailValidationMessage() {
+        return find(emailField).getDomProperty("validationMessage");
+    }
+
 
 
 

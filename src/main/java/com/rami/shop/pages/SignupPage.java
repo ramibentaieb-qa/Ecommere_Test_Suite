@@ -57,6 +57,10 @@ private By mobileNumberField = By.id("mobile_number");
 private By createAccountButton = By.cssSelector("button[data-qa='create-account']");
 
 
+//get Validation Messsagee
+private By firstInvalidField = By.cssSelector("input:invalid, select:invalid");
+
+
 
 public void ClickMaleRadioButton() {
     clickJs(maleRadioButton);
@@ -183,7 +187,15 @@ public accountCreatedPage clickCreateAccountButton() {
     return new accountCreatedPage();
 }
 
+//Method for validation message
 
+public String getValidationMessage() {
+    return find(firstInvalidField).getDomProperty("validationMessage");
+}
+
+//public String getInvalidFieldName() {
+//    return find(firstInvalidField).getDomProperty("id");
+//}
 
 
 }

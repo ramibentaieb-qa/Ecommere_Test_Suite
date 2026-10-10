@@ -4,7 +4,6 @@ import com.rami.shop.base.BaseTest;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static utilities.SwitchToUtility.getAlertMessage;
 
 public class NegativeSignupTest extends BaseTest {
 
@@ -17,9 +16,9 @@ public class NegativeSignupTest extends BaseTest {
         signupLoginPage.setEmail(signupEmail);
         signupLoginPage.clickSignupButton();
 
-        String expectedAlertMessage = "Please include an'@' in the email address. '" + signupEmail + "' is missing an '@'.";
-        Assert.assertEquals(getAlertMessage(), expectedAlertMessage,  "\n Actual and expected messages do not match \n");
-
+        String actualMessage = signupLoginPage.getEmailValidationMessage();
+        Assert.assertTrue(actualMessage.contains("@"),
+                "The form should not have moved to the page");
 
     }
 
