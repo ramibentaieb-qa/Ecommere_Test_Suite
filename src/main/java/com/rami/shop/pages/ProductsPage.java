@@ -17,7 +17,9 @@ public class ProductsPage extends BasePage {
     private By modalTitle = By.xpath("//h4[contains(text(), 'Added!')]");
     private By continueShoppingButton = By.cssSelector("button[data-dismiss='modal']");
     private By cartButton = By.cssSelector("a[href='/view_cart']");
-
+    private By viewProductButton(int productDetailsId) {
+        return By.cssSelector("a[href='/product_details/'" + productDetailsId + "']");
+    }
 
 
 
@@ -26,7 +28,6 @@ public class ProductsPage extends BasePage {
     }
 
     public void addProductToCart(int productId) {
-        fluentWaitUntilVisible(5, addToCartButton(productId));
         scrollToElementJS(addToCartButton(productId));
         clickJs(addToCartButton(productId));
         delay(2000);
@@ -45,6 +46,12 @@ public class ProductsPage extends BasePage {
         scrollToElementJS(cartButton);
         click(cartButton);
         return new CartPage();
+    }
+
+    public ProductDetailsPage navigateToProductDetails(int productDetailsId) {
+        scrollToElementJS(viewProductButton(productDetailsId));
+        clickJs(viewProductButton(productDetailsId));
+        return new ProductDetailsPage();
     }
 
 

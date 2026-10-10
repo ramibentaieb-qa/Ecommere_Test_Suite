@@ -15,6 +15,10 @@ public class CartPage extends BasePage {
     private By backToProductsButton = By.cssSelector("#empty_cart a[href='/products']");
     private By checkoutButton = By.cssSelector("a.check_out");
 
+    private By quantityOf(int productDetailsId) {
+        return By.cssSelector("#product-" + productDetailsId + " .cart_quantity button");
+    }
+
 
 
 
@@ -40,6 +44,10 @@ public class CartPage extends BasePage {
     public CheckoutPage navigateToCheckoutPage() {
         click(checkoutButton);
         return new CheckoutPage();
+    }
+
+    public String getQuantity(int productDetailsId) {
+        return find(quantityOf(productDetailsId)).getText();
     }
 
 
