@@ -15,11 +15,22 @@ public class CartPage extends BasePage {
     }
     private By emptyCartText = By.cssSelector("span[id='empty_cart'] b");
     private By backToProductsButton = By.cssSelector("#empty_cart a[href='/products']");
-    private By checkoutButton = By.cssSelector("a.check_out");
 
+    private By priceOf(int productId) {
+        return By.cssSelector("#product-" + productId + " .cart_price p");
+    }
     private By quantityOf(int productId) {
         return By.cssSelector("#product-" + productId + " .cart_quantity button");
     }
+    private By totalOf(int productId) {
+        return By.cssSelector("#product-" + productId + " .cart_total_price");
+    }
+    private int toNumber(String text) {
+        return Integer.parseInt(text.replaceAll("[^0-9]", ""));
+    }
+
+    private By checkoutButton = By.cssSelector("a.check_out");
+
 
 
 
@@ -48,10 +59,22 @@ public class CartPage extends BasePage {
         return new CheckoutPage();
     }
 
-    public String getQuantity(int productDetailsId) {
-        scrollToElementJS(quantityOf((productDetailsId)));
-        return find(quantityOf(productDetailsId)).getText();
+    public int  getPrice(int productId) {
+        scrollToElementJS(priceOf(productId));
+        return toNumber(find(priceOf(productId)).getText());
     }
+
+    public String getQuantity(int productId) {
+        scrollToElementJS(quantityOf(productId));
+        return find(quantityOf(productId)).getText();
+    }
+
+    public int getTotal(int productId) {
+        scrollToElementJS(totalOf(productId));
+        return toNumber(find(totalOf(productId)).getText());
+    }
+
+
 
 
 

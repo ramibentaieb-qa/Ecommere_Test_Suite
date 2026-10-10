@@ -14,7 +14,8 @@ public class CheckoutTest extends BaseTest {
 
     private static final String EXISTING_EMAIL  = "michele@test.com";
     private static final String EXISTING_PASSWORD  = "Michele123";
-    int quantity = 5;
+    int quantity = 2;
+    private int expectedTotal;
 
     @BeforeMethod
     public void prepareCart() {
@@ -23,14 +24,24 @@ public class CheckoutTest extends BaseTest {
         signupLoginPage.setPassword(EXISTING_PASSWORD);
         signupLoginPage.loginToHomePage();
         homePage.goToProductsPage();
-        productsPage.navigateToProductDetails(3);
+        productsPage.navigateToProductDetails(1);
         productDetailsPage.setQuantity(quantity);
         Assert.assertEquals(productDetailsPage.getQuantity(), String.valueOf(quantity));
+
         productDetailsPage.addProductToCart();
-        productDetailsPage.navigateToCart();
+        homePage.goToProductsPage();
+        productsPage.addProductToCart(2);
+        productsPage.clickContinueShoppingButton();
+        productsPage.clickCartButton();
 
 
-        Assert.assertEquals(cartPage.getQuantity(5),  String.valueOf(quantity));
+        Assert.assertEquals(cartPage.getQuantity(1),  String.valueOf(quantity));
+        int price = cartPage.getPrice(1);
+        int total = cartPage.getTotal(1);
+        Assert.assertEquals(total, price * quantity,
+                "Total price is incorrect");
+
+        expectedTotal = cartPage.getTotal(1) + cartPage.getTotal(2);
         cartPage.navigateToCheckoutPage();
     }
 
@@ -52,17 +63,11 @@ public class CheckoutTest extends BaseTest {
     List<String> delivery = checkoutPage.getDeliveryAddress();
     List<String> billing = checkoutPage.getBillingAddress();
 
-Assert.assertEquals(delivery, expected, "Delivery address is wrong");
-Assert.assertEquals(billing, expected, "Billing address is wrong");
+    Assert.assertEquals(delivery, expected, "Delivery address is wrong");
+    Assert.assertEquals(billing, expected, "Billing address is wrong");
 
-
-
-
-
-
-
-
-
+    Assert.assertEquals(checkoutPage.getTotalAmount(), expectedTotal, "Total amount is wrong");
+    System.out.println("Total amount is: " + checkoutPage.getTotalAmount());
 
 
 
