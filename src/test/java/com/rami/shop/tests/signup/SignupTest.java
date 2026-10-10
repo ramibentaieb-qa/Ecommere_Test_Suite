@@ -47,6 +47,7 @@ public class SignupTest extends BaseTest {
         signupPage.setLastNameField(data.address.lastName);
         signupPage.setCompanyField(data.address.company);
         signupPage.setAddress1Field(data.address.address1);
+        signupPage.setAddress1Field(data.address.address2);
         signupPage.selectCountryDropDown(data.address.country);
         signupPage.setStateField(data.address.state);
         signupPage.setCityField(data.address.city);

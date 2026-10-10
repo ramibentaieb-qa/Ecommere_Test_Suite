@@ -25,6 +25,7 @@ public class ProductsPage extends BasePage {
     }
 
     public void addProductToCart(int productId) {
+        delay(5000);
         scrollToElementJS(addToCartButton(productId));
         clickJs(addToCartButton(productId));
         delay(2000);

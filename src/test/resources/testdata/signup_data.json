@@ -1,24 +1,25 @@
 [
   {
-    "username": "mae",
-    "email": "@hunter.com",
+    "username": "Johana",
+    "email": "@johana.com",
     "password": "",
     "gender": "female",
     "day": "1",
     "month": "10",
-    "year": "1992",
-    "newsletter": false,
-    "specialOffers": false,
+    "year": "1996",
+    "newsletter": true,
+    "specialOffers": true,
     "address": {
-      "firstName": "mae",
-      "lastName": "hunter",
-      "company": "Hunter Inc",
+      "firstName": "Johana",
+      "lastName": "Doe",
+      "company": "Hunting Bug Inc",
       "address1": "123 Automation St",
-      "country": "Canada",
-      "state": "BC",
-      "city": "Vancouver",
+      "address2": "456 Automation Av",
+      "country": "United States",
+      "state": "California",
+      "city": "Los Angeles",
       "zipcode": "V6B 1A1",
-      "mobileNumber": "225588996633"
+      "mobileNumber": "+1 25588996633"
     }
   }
 ]

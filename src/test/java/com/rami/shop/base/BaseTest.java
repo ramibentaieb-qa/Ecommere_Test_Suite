@@ -17,6 +17,7 @@ public class BaseTest {
     protected static DeleteAccountPage deleteAccountPage;
     protected static ProductsPage productsPage;
     protected static CartPage cartPage;
+    protected static CheckoutPage checkoutPage;
 
     protected static String createdEmail;
     protected static String createdPassword;
@@ -36,6 +37,7 @@ public class BaseTest {
         deleteAccountPage = new DeleteAccountPage();
         productsPage = new ProductsPage();
         cartPage = new CartPage();
+        checkoutPage = new CheckoutPage();
     }
 
 

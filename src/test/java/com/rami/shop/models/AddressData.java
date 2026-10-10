@@ -6,6 +6,7 @@ public class AddressData {
     public String lastName;
     public String company;
     public String address1;
+    public String address2;
     public String country;
     public String state;
     public String city;
