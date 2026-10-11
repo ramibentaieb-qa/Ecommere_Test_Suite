@@ -25,6 +25,8 @@ public class BaseTest {
     protected static CartPage cartPage;
     protected static CheckoutPage checkoutPage;
     protected static ProductDetailsPage productDetailsPage;
+    protected static PaymentPage paymentPage;
+    protected static ConfirmedPaymentPage confirmedPaymentPage;
 
     protected static String createdEmail;
     protected static String createdPassword;
@@ -60,6 +62,8 @@ public class BaseTest {
         cartPage = new CartPage();
         checkoutPage = new CheckoutPage();
         productDetailsPage = new ProductDetailsPage();
+        paymentPage = new PaymentPage();
+        confirmedPaymentPage = new ConfirmedPaymentPage();
     }
 
 

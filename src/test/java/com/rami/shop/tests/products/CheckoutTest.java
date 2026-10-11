@@ -69,7 +69,26 @@ public class CheckoutTest extends BaseTest {
     Assert.assertEquals(checkoutPage.getTotalAmount(), expectedTotal, "Total amount is wrong");
     System.out.println("Total amount is: " + checkoutPage.getTotalAmount());
 
+        checkoutPage.navigateToPaymentPage();
+        paymentPage.setNameOnCard("Michele Doe");
+        paymentPage.setCardNumber("1234567890123");
+        paymentPage.setCvc("951");
+        paymentPage.setExpiryMonth("02");
+        paymentPage.setExpiryYear("2027");
+        paymentPage.navigateToConfirmedPaymentPage();
 
+        String ExpectedSuccessTextMessage = "Your order has been placed successfully!";
+        Assert.assertEquals(paymentPage.getSuccessfulMessage(), ExpectedSuccessTextMessage, "Something wrong with payment");
+
+//        String EmptyField = paymentPage.getFieldValidationMessage();
+//        Assert.assertTrue(EmptyField.contains("Please"),
+//                "A field is empty");
+
+        String ExpectedConfirmedPayment = "Order Placed!";
+        Assert.assertEquals(confirmedPaymentPage.getConfirmationMessage(),  ExpectedConfirmedPayment,
+                "Confirmation message is not shown");
+
+        confirmedPaymentPage.backToHomePage();
 
     }
 }
