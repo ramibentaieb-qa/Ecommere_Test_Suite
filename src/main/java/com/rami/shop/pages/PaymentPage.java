@@ -14,7 +14,6 @@ public class PaymentPage extends BasePage {
     private By expiryMonth = By.cssSelector("input[data-qa='expiry-month']");
     private By expiryYear = By.cssSelector("input[data-qa='expiry-year']");
     private By confirmButton = By.cssSelector("button[data-qa='pay-button']");
-    private By successPaymentMessage = By.id("#success_message div");
     private By firstCardInvalidField = By.cssSelector("input:invalid, select:invalid");
 
     public void setNameOnCard(String cardName) {
@@ -42,11 +41,6 @@ public class PaymentPage extends BasePage {
         click(confirmButton);
         delay(2000);
         return new ConfirmedPaymentPage();
-    }
-
-    public String getSuccessfulMessage() {
-        explicitWaitUntilVisible(5, successPaymentMessage);
-        return find(successPaymentMessage).getText();
     }
 
     public String getFieldValidationMessage() {

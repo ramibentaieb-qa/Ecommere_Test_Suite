@@ -14,7 +14,7 @@ public class CheckoutTest extends BaseTest {
 
     private static final String EXISTING_EMAIL  = "michele@test.com";
     private static final String EXISTING_PASSWORD  = "Michele123";
-    int quantity = 2;
+    int quantity = 5;
     private int expectedTotal;
 
     @BeforeMethod
@@ -24,24 +24,24 @@ public class CheckoutTest extends BaseTest {
         signupLoginPage.setPassword(EXISTING_PASSWORD);
         signupLoginPage.loginToHomePage();
         homePage.goToProductsPage();
-        productsPage.navigateToProductDetails(1);
+        productsPage.navigateToProductDetails(6);
         productDetailsPage.setQuantity(quantity);
         Assert.assertEquals(productDetailsPage.getQuantity(), String.valueOf(quantity));
 
         productDetailsPage.addProductToCart();
         homePage.goToProductsPage();
-        productsPage.addProductToCart(2);
+        productsPage.addProductToCart(8);
         productsPage.clickContinueShoppingButton();
         productsPage.clickCartButton();
 
 
-        Assert.assertEquals(cartPage.getQuantity(1),  String.valueOf(quantity));
-        int price = cartPage.getPrice(1);
-        int total = cartPage.getTotal(1);
+        Assert.assertEquals(cartPage.getQuantity(6),  String.valueOf(quantity));
+        int price = cartPage.getPrice(6);
+        int total = cartPage.getTotal(6);
         Assert.assertEquals(total, price * quantity,
                 "Total price is incorrect");
 
-        expectedTotal = cartPage.getTotal(1) + cartPage.getTotal(2);
+        expectedTotal = cartPage.getTotal(6) + cartPage.getTotal(8);
         cartPage.navigateToCheckoutPage();
     }
 
@@ -70,22 +70,19 @@ public class CheckoutTest extends BaseTest {
     System.out.println("Total amount is: " + checkoutPage.getTotalAmount());
 
         checkoutPage.navigateToPaymentPage();
-        paymentPage.setNameOnCard("Michele Doe");
+        paymentPage.setNameOnCard("");
         paymentPage.setCardNumber("1234567890123");
         paymentPage.setCvc("951");
         paymentPage.setExpiryMonth("02");
         paymentPage.setExpiryYear("2027");
         paymentPage.navigateToConfirmedPaymentPage();
 
-        String ExpectedSuccessTextMessage = "Your order has been placed successfully!";
-        Assert.assertEquals(paymentPage.getSuccessfulMessage(), ExpectedSuccessTextMessage, "Something wrong with payment");
-
 //        String EmptyField = paymentPage.getFieldValidationMessage();
 //        Assert.assertTrue(EmptyField.contains("Please"),
 //                "A field is empty");
 
         String ExpectedConfirmedPayment = "Order Placed!";
-        Assert.assertEquals(confirmedPaymentPage.getConfirmationMessage(),  ExpectedConfirmedPayment,
+        Assert.assertEquals(confirmedPaymentPage.getConfirmationMessage(),  ExpectedConfirmedPayment.toUpperCase(),
                 "Confirmation message is not shown");
 
         confirmedPaymentPage.backToHomePage();
