@@ -2,7 +2,7 @@
 <suite name="Automation Exercise Suite">
     <test name="User Negative Login">
         <classes>
-            <class name="com.rami.shop.tests.signup.NegativeLoginTest"/>
+            <class name="com.rami.shop.tests.auth.NegativeLoginTest"/>
         </classes>
     </test>
 </suite>

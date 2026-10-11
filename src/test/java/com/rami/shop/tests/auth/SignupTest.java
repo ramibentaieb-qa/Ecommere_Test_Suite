@@ -1,7 +1,6 @@
-package com.rami.shop.tests.signup;
+package com.rami.shop.tests.auth;
 
 import com.rami.shop.base.BaseTest;
-import com.rami.shop.models.AddressData;
 import com.rami.shop.models.SignupData;
 import com.rami.shop.pages.accountCreatedPage;
 import com.rami.shop.utils.TestDataProviders;
@@ -16,13 +15,15 @@ public class SignupTest extends BaseTest {
 
       String email = System.currentTimeMillis() + "_" + data.email;
       String password = System.currentTimeMillis() + "_" + data.password;
+      String username = data.username;
 
       createdEmail = email;
       createdPassword = password;
+      createdUsername = username;
 
 //Step 1: Signup
         homePage.goToSignupPage();
-        signupLoginPage.setUsername(data.username);
+        signupLoginPage.setUsername(username);
         signupLoginPage.setEmail(email);
         signupLoginPage.clickSignupButton();
 
@@ -47,7 +48,7 @@ public class SignupTest extends BaseTest {
         signupPage.setLastNameField(data.address.lastName);
         signupPage.setCompanyField(data.address.company);
         signupPage.setAddress1Field(data.address.address1);
-        signupPage.setAddress1Field(data.address.address2);
+        signupPage.setAddress2Field(data.address.address2);
         signupPage.selectCountryDropDown(data.address.country);
         signupPage.setStateField(data.address.state);
         signupPage.setCityField(data.address.city);
@@ -69,35 +70,8 @@ public class SignupTest extends BaseTest {
 
 
 //Step 2: Logout
-
         homePage.logoutToSignupPage();
         Assert.assertTrue(driver.getCurrentUrl().contains("/login"),
                 "After logout we should be on the login page");
-
-
-//Ste 3: Login
-
-//        signupLoginPage.setLoginEmail(email);
-//        signupLoginPage.setPassword(password);
-//        signupLoginPage.loginToHomePage();
-//        Assert.assertEquals(homePage.getLogoutText(),
-//                "Logout", "You are not logged in!");
-
-//      Assert.assertTrue(homePage.getUsernameText().contains(data.username),
-//              "Are you sure you are logged in?");
-
-//        homePage.goToDeleteAccountPage();
-
-
-//Step 4: Delete Account
-
-//        Assert.assertEquals(deleteAccountPage.getAccountDeletedText(),
-//                "ACCOUNT DELETED!", "Your account has not been deleted!");
-//
-//        deleteAccountPage.clickContinueButton();
-
     }
-
-
-
 }

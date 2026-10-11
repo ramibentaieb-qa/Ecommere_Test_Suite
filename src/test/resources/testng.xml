@@ -2,7 +2,7 @@
 <suite name="Automation Exercise Suite">
     <test name="User Journey Tests">
     <classes>
-<!--        <class name="com.rami.shop.tests.signup.SignupTest"/>-->
+<!--        <class name="com.rami.shop.tests.auth.SignupTest"/>-->
 <!--        <class name="com.rami.shop.tests.products.ProductTest"/>-->
         <class name="com.rami.shop.tests.products.CheckoutTest"/>
     </classes>

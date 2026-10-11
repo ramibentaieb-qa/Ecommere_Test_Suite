@@ -30,6 +30,7 @@ public class BaseTest {
 
     protected static String createdEmail;
     protected static String createdPassword;
+    protected static String createdUsername;
 
     private String url = "https://automationexercise.com/";
 

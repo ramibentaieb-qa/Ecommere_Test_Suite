@@ -1,4 +1,4 @@
-package com.rami.shop.tests.signup;
+package com.rami.shop.tests.auth;
 
 import com.rami.shop.base.BaseTest;
 import com.rami.shop.models.SignupData;
