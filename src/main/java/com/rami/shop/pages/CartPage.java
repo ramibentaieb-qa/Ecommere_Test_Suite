@@ -2,6 +2,7 @@ package com.rami.shop.pages;
 
 import com.rami.shop.base.BasePage;
 import org.openqa.selenium.By;
+import static utilities.WaitUtility.*;
 
 import static utilities.JavaScriptUtility.scrollToElementJS;
 
@@ -45,7 +46,7 @@ public class CartPage extends BasePage {
     }
 
     public String getEmptyCartText() {
-        delay(2000);
+        explicitWaitUntilVisible(5, emptyCartText);
         return find(emptyCartText).getText();
     }
 

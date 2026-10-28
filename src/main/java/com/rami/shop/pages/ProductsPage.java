@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 
 import static utilities.JavaScriptUtility.clickJs;
 import static utilities.JavaScriptUtility.scrollToElementJS;
-import static utilities.WaitUtility.fluentWaitUntilVisible;
+import static utilities.WaitUtility.*;
 
 public class ProductsPage extends BasePage {
 
@@ -30,7 +30,7 @@ public class ProductsPage extends BasePage {
     public void addProductToCart(int productId) {
         scrollToElementJS(addToCartButton(productId));
         clickJs(addToCartButton(productId));
-        delay(2000);
+        explicitWaitUntilVisible(5, modalTitle);
     }
 
     public String getModalTitle() {
@@ -39,7 +39,7 @@ public class ProductsPage extends BasePage {
 
     public void clickContinueShoppingButton() {
         click(continueShoppingButton);
-        delay(2000);
+        explicitWaitUntilInvisible(5, modalTitle);
     }
 
     public CartPage clickCartButton() {

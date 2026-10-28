@@ -17,6 +17,16 @@ public class WaitUtility extends Utility {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
+    public static void explicitWaitUntilInvisible(int seconds, By locator) {
+        WebDriverWait wait = new WebDriverWait(BasePage.getDriver(), Duration.ofSeconds(seconds));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(locator));
+    }
+
+    public static void explicitWaitUntilClickable(int seconds, By locator) {
+        WebDriverWait wait = new WebDriverWait(BasePage.getDriver(), Duration.ofSeconds(seconds));
+        wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
     public static void fluentWaitUntilVisible(int seconds, By locator) {
         FluentWait fluentWait = new FluentWait(BasePage.getDriver())
                 .withTimeout(Duration.ofSeconds(seconds))

@@ -2,6 +2,7 @@ package com.rami.shop.pages;
 
 import com.rami.shop.base.BasePage;
 import org.openqa.selenium.By;
+import static utilities.WaitUtility.*;
 
 public class ProductDetailsPage extends BasePage {
 
@@ -47,11 +48,11 @@ public class ProductDetailsPage extends BasePage {
 
     public void clickContinueShoppingButton() {
         click(continueShoppingButton);
-        delay(2000);
+        explicitWaitUntilInvisible(5, modalTitle);
     }
 
     public CartPage navigateToCart() {
-        delay(2000);
+        explicitWaitUntilClickable(5, viewCartButton);
         click(viewCartButton);
         return new CartPage();
     }

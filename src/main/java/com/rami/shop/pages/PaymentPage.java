@@ -4,7 +4,7 @@ import com.rami.shop.base.BasePage;
 import org.openqa.selenium.By;
 
 import static utilities.JavaScriptUtility.scrollToElementJS;
-import static utilities.WaitUtility.explicitWaitUntilVisible;
+import static utilities.WaitUtility.*;
 
 public class PaymentPage extends BasePage {
 
@@ -39,7 +39,6 @@ public class PaymentPage extends BasePage {
     public ConfirmedPaymentPage navigateToConfirmedPaymentPage() {
         scrollToElementJS(confirmButton);
         click(confirmButton);
-        delay(2000);
         return new ConfirmedPaymentPage();
     }
 

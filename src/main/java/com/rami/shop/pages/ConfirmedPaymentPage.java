@@ -2,6 +2,7 @@ package com.rami.shop.pages;
 
 import com.rami.shop.base.BasePage;
 import org.openqa.selenium.By;
+import static utilities.WaitUtility.*;
 
 public class ConfirmedPaymentPage extends BasePage {
 
@@ -11,6 +12,7 @@ public class ConfirmedPaymentPage extends BasePage {
 
 
     public String getConfirmationMessage() {
+        explicitWaitUntilVisible(10, confirmMessage);
         return find(confirmMessage).getText();
     }
 
