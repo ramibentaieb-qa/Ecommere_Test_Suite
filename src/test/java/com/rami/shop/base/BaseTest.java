@@ -47,6 +47,9 @@ public class BaseTest {
 
             Path downloadPath = Paths.get("target", "downloads").toAbsolutePath();
             Files.createDirectories(downloadPath);
+            try (var files = Files.list(downloadPath)) {
+                for (Path f : files.toList()) Files.delete(f);
+            }
 
                 Map<String, Object> prefs = new HashMap<>();
                 prefs.put("credentials_enable_service", false);
@@ -55,7 +58,7 @@ public class BaseTest {
 
                 prefs.put("download.default_directory", downloadPath.toString());
                 prefs.put("download.prompt_for_download", false);
-                prefs.put("dowbload.directory_upgrade", false);
+                prefs.put("download.directory_upgrade", false);
 
                 options.setExperimentalOption("prefs", prefs);
                 options.addArguments("--disable-notifications");
@@ -67,6 +70,21 @@ public class BaseTest {
                         "*googleadservices.com*", "*adservice.google.com*")));
                 driver = chrome;
         } else if(browser.equalsIgnoreCase("edge")) {
+            Path downloadPath = Paths.get("target", "downloads").toAbsolutePath();
+            Files.createDirectories(downloadPath);
+            try (var files = Files.list(downloadPath)) {
+                for (Path f : files.toList()) Files.delete(f);
+            }
+
+            Map<String, Object> prefs = new HashMap<>();
+            prefs.put("credentials_enable_service", false);
+            prefs.put("profile.password_manager_enabled", false);
+            prefs.put("profile.password_manager_leak_detection", false);
+
+            prefs.put("download.default_directory", downloadPath.toString());
+            prefs.put("download.prompt_for_download", false);
+            prefs.put("download.directory_upgrade", false);
+
             driver = new EdgeDriver();
         } else {
             throw new Exception("Incorrect Browser");

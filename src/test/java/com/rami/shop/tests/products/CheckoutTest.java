@@ -21,7 +21,7 @@ public class CheckoutTest extends BaseTest {
     int quantity = 5;
     private int expectedTotal;
 
-    private void verifyInvoiceContent() throws Exception {
+    private void verifyInvoiceContent(int expectedAmount) throws Exception {
         Path downloadPath = Paths.get("target","downloads").toAbsolutePath();
         Path invoiceFile = null;
         long deadline = System.currentTimeMillis() + 15000;
@@ -38,6 +38,7 @@ public class CheckoutTest extends BaseTest {
                 break;
             }
             Thread.sleep(500);
+            System.out.println(invoiceFile);
         }
 
         Assert.assertNotNull(invoiceFile, "Invoice was not downloaded");
@@ -46,7 +47,7 @@ public class CheckoutTest extends BaseTest {
                 invoiceContent.contains("Hi Johana Doe"), "Customer name was not found in the invoice."
         );
         Assert.assertTrue(
-                invoiceContent.contains("278"), "Total purchase amount was not found in the invoice."
+                invoiceContent.contains(String.valueOf(expectedAmount)), "Total purchase amount was not found in the invoice."
         );
     }
 
@@ -119,7 +120,7 @@ public class CheckoutTest extends BaseTest {
                 "Confirmation message is not shown");
 
         confirmedPaymentPage.downloadInvoice();
-        verifyInvoiceContent();
+        verifyInvoiceContent(expectedTotal);
 
         confirmedPaymentPage.backToHomePage();
 
