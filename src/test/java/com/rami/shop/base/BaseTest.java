@@ -6,9 +6,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
-import org.testng.annotations.*;
-import utilities.Utility;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import utilities.Utility;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -43,24 +45,11 @@ public class BaseTest {
     @BeforeMethod
     @Parameters("browser")
     public void setUp(@Optional("chrome")String browser) throws Exception {
-        if (browser.equalsIgnoreCase("chrome")) {
+            Path downloadPath = prepareDownloadFolder();
+            Map<String, Object> prefs = buildPrefs(downloadPath);
+
+            if (browser.equalsIgnoreCase("chrome")) {
                 ChromeOptions options = new ChromeOptions();
-
-            Path downloadPath = Paths.get("target", "downloads").toAbsolutePath();
-            Files.createDirectories(downloadPath);
-            try (var files = Files.list(downloadPath)) {
-                for (Path f : files.toList()) Files.delete(f);
-            }
-
-                Map<String, Object> prefs = new HashMap<>();
-                prefs.put("credentials_enable_service", false);
-                prefs.put("profile.password_manager_enabled", false);
-                prefs.put("profile.password_manager_leak_detection", false);
-
-                prefs.put("download.default_directory", downloadPath.toString());
-                prefs.put("download.prompt_for_download", false);
-                prefs.put("download.directory_upgrade", false);
-
                 options.setExperimentalOption("prefs", prefs);
                 options.addArguments("--disable-notifications");
 
@@ -70,31 +59,14 @@ public class BaseTest {
                         "*googlesyndication.com*", "*doubleclick.net*",
                         "*googleadservices.com*", "*adservice.google.com*")));
                 driver = chrome;
-        } else if(browser.equalsIgnoreCase("edge")) {
-
-            Path downloadPath = Paths.get("target", "downloads").toAbsolutePath();
-            Files.createDirectories(downloadPath);
-            try (var files = Files.list(downloadPath)) {
-                for (Path f : files.toList()) Files.delete(f);
-            }
-
-            Map<String, Object> prefs = new HashMap<>();
-            prefs.put("credentials_enable_service", false);
-            prefs.put("profile.password_manager_enabled", false);
-            prefs.put("profile.password_manager_leak_detection", false);
-
-            prefs.put("download.default_directory", downloadPath.toString());
-            prefs.put("download.prompt_for_download", false);
-            prefs.put("download.directory_upgrade", false);
-
-            EdgeOptions edgeOptions = new EdgeOptions();
-            edgeOptions.setExperimentalOption("prefs", prefs);
-            edgeOptions.addArguments("--disable-notifications");
-
-            driver = new EdgeDriver(edgeOptions);
+            } else if (browser.equalsIgnoreCase("edge")) {
+                EdgeOptions options = new EdgeOptions();
+                options.setExperimentalOption("prefs", prefs);
+                options.addArguments("--disable-notifications");
+                driver = new EdgeDriver(options);
         } else {
-            throw new Exception("Incorrect Browser");
-        }
+                throw  new Exception("Incorrect Browser");
+            }
 
         driver.manage().window().maximize();
         driver.get(url);
@@ -111,6 +83,26 @@ public class BaseTest {
         productDetailsPage = new ProductDetailsPage();
         paymentPage = new PaymentPage();
         confirmedPaymentPage = new ConfirmedPaymentPage();
+    }
+
+    private Path prepareDownloadFolder() throws Exception {
+        Path downloadPath = Paths.get("target", "downloads").toAbsolutePath();
+        Files.createDirectories(downloadPath);
+        try (var files = Files.list(downloadPath)) {
+            for (Path f : files.toList()) Files.delete(f);
+        }
+        return downloadPath;
+    }
+
+    private Map<String, Object> buildPrefs(Path downloadPath) {
+        Map<String, Object> prefs = new HashMap<>();
+        prefs.put("credentials_enable_service", false);
+        prefs.put("profile.password_manager_enabled", false);
+        prefs.put("profile.password_manager_leak_detection", false);
+        prefs.put("download.default_directory", downloadPath.toString());
+        prefs.put("download.prompt_for_download", false);
+        prefs.put("download.directory_upgrade", false);
+        return prefs;
     }
 
 
