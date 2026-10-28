@@ -7,8 +7,12 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class CheckoutTest extends BaseTest {
 
@@ -16,6 +20,35 @@ public class CheckoutTest extends BaseTest {
     private static final String EXISTING_PASSWORD  = "Michele123";
     int quantity = 5;
     private int expectedTotal;
+
+    private void verifyInvoiceContent() throws Exception {
+        Path downloadPath = Paths.get("target","downloads").toAbsolutePath();
+        Path invoiceFile = null;
+        long deadline = System.currentTimeMillis() + 15000;
+
+        while (System.currentTimeMillis() < deadline) {
+            try (Stream<Path> files = Files.list(downloadPath)) {
+                invoiceFile = files
+                        .filter(Files::isRegularFile)
+                        .filter(file -> !file.getFileName().toString().endsWith(".crdownload"))
+                        .findFirst()
+                        .orElse(null);
+            }
+            if (invoiceFile != null) {
+                break;
+            }
+            Thread.sleep(500);
+        }
+
+        Assert.assertNotNull(invoiceFile, "Invoice was not downloaded");
+        String invoiceContent = Files.readString(invoiceFile);
+        Assert.assertTrue(
+                invoiceContent.contains("Hi Johana Doe"), "Customer name was not found in the invoice."
+        );
+        Assert.assertTrue(
+                invoiceContent.contains("278"), "Total purchase amount was not found in the invoice."
+        );
+    }
 
     @BeforeMethod
     public void prepareCart() {
@@ -47,7 +80,7 @@ public class CheckoutTest extends BaseTest {
 
     @Test(dataProvider = "signupDataProvider",
             dataProviderClass = TestDataProviders.class)
-    public void testCheckoutProcess(SignupData data) {
+    public void testCheckoutProcess(SignupData data) throws Exception {
 
     String title = "male".equalsIgnoreCase(data.gender) ? "Mr." : "Mrs.";
 
@@ -70,7 +103,7 @@ public class CheckoutTest extends BaseTest {
     System.out.println("Total amount is: " + checkoutPage.getTotalAmount());
 
         checkoutPage.navigateToPaymentPage();
-        paymentPage.setNameOnCard("");
+        paymentPage.setNameOnCard("Michele on the Card");
         paymentPage.setCardNumber("1234567890123");
         paymentPage.setCvc("951");
         paymentPage.setExpiryMonth("02");
@@ -84,6 +117,9 @@ public class CheckoutTest extends BaseTest {
         String ExpectedConfirmedPayment = "Order Placed!";
         Assert.assertEquals(confirmedPaymentPage.getConfirmationMessage(),  ExpectedConfirmedPayment.toUpperCase(),
                 "Confirmation message is not shown");
+
+        confirmedPaymentPage.downloadInvoice();
+        verifyInvoiceContent();
 
         confirmedPaymentPage.backToHomePage();
 

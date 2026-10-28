@@ -7,7 +7,7 @@ public class ConfirmedPaymentPage extends BasePage {
 
     private By confirmMessage = By.cssSelector("h2[data-qa='order-placed']");
     private By continueButton = By.cssSelector("a[data-qa='continue-button']");
-
+    private By downloadButton = By.ById.linkText("Download Invoice");
 
 
     public String getConfirmationMessage() {
@@ -17,6 +17,10 @@ public class ConfirmedPaymentPage extends BasePage {
     public HomePage backToHomePage() {
         click(continueButton);
         return new HomePage();
+    }
+
+    public void downloadInvoice() {
+        click(downloadButton);
     }
 
 

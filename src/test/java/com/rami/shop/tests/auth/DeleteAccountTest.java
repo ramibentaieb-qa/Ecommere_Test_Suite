@@ -24,13 +24,5 @@ public class DeleteAccountTest extends BaseTest {
                 "ACCOUNT DELETED!", "Your account has not been deleted!");
 
         deleteAccountPage.clickContinueButton();
-
-
-
-
-
-
-
-
     }
 }

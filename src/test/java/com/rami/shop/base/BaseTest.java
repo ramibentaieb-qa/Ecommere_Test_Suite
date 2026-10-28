@@ -4,9 +4,14 @@ import com.rami.shop.pages.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.annotations.*;
 import utilities.Utility;
+import org.testng.annotations.Optional;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,21 +40,38 @@ public class BaseTest {
     private String url = "https://automationexercise.com/";
 
     @BeforeMethod
-    public void setUp() {
-        ChromeOptions options = new ChromeOptions();
-        Map<String, Object> prefs = new HashMap<>();
-        prefs.put("credentials_enable_service", false);
-        prefs.put("profile.password_manager_enabled", false);
-        prefs.put("profile.password_manager_leak_detection", false);
-        options.setExperimentalOption("prefs", prefs);
-        options.addArguments("--disable-notifications");
+    @Parameters("browser")
+    public void setUp(@Optional("chrome")String browser) throws Exception {
+        if (browser.equalsIgnoreCase("chrome")) {
+                ChromeOptions options = new ChromeOptions();
 
-        ChromeDriver chrome = new ChromeDriver(options);
-        chrome.executeCdpCommand("Network.enable", new HashMap<>());
-        chrome.executeCdpCommand("Network.setBlockedURLs", Map.of("urls", List.of(
-                "*googlesyndication.com*", "*doubleclick.net*",
-                "*googleadservices.com*", "*adservice.google.com*")));
-        driver = chrome;
+            Path downloadPath = Paths.get("target", "downloads").toAbsolutePath();
+            Files.createDirectories(downloadPath);
+
+                Map<String, Object> prefs = new HashMap<>();
+                prefs.put("credentials_enable_service", false);
+                prefs.put("profile.password_manager_enabled", false);
+                prefs.put("profile.password_manager_leak_detection", false);
+
+                prefs.put("download.default_directory", downloadPath.toString());
+                prefs.put("download.prompt_for_download", false);
+                prefs.put("dowbload.directory_upgrade", false);
+
+                options.setExperimentalOption("prefs", prefs);
+                options.addArguments("--disable-notifications");
+
+                ChromeDriver chrome = new ChromeDriver(options);
+                chrome.executeCdpCommand("Network.enable", new HashMap<>());
+                chrome.executeCdpCommand("Network.setBlockedURLs", Map.of("urls", List.of(
+                        "*googlesyndication.com*", "*doubleclick.net*",
+                        "*googleadservices.com*", "*adservice.google.com*")));
+                driver = chrome;
+        } else if(browser.equalsIgnoreCase("edge")) {
+            driver = new EdgeDriver();
+        } else {
+            throw new Exception("Incorrect Browser");
+        }
+
         driver.manage().window().maximize();
         driver.get(url);
         basePage = new BasePage();
