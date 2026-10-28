@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.testng.annotations.*;
 import utilities.Utility;
 import org.testng.annotations.Optional;
@@ -70,6 +71,7 @@ public class BaseTest {
                         "*googleadservices.com*", "*adservice.google.com*")));
                 driver = chrome;
         } else if(browser.equalsIgnoreCase("edge")) {
+
             Path downloadPath = Paths.get("target", "downloads").toAbsolutePath();
             Files.createDirectories(downloadPath);
             try (var files = Files.list(downloadPath)) {
@@ -85,7 +87,11 @@ public class BaseTest {
             prefs.put("download.prompt_for_download", false);
             prefs.put("download.directory_upgrade", false);
 
-            driver = new EdgeDriver();
+            EdgeOptions edgeOptions = new EdgeOptions();
+            edgeOptions.setExperimentalOption("prefs", prefs);
+            edgeOptions.addArguments("--disable-notifications");
+
+            driver = new EdgeDriver(edgeOptions);
         } else {
             throw new Exception("Incorrect Browser");
         }

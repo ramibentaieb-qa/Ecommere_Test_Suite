@@ -38,7 +38,6 @@ public class CheckoutTest extends BaseTest {
                 break;
             }
             Thread.sleep(500);
-            System.out.println(invoiceFile);
         }
 
         Assert.assertNotNull(invoiceFile, "Invoice was not downloaded");
