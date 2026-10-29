@@ -10,9 +10,7 @@ public class DeleteAccountTest extends BaseTest {
     public void testDeleteAccount() {
 
         homePage.goToSignupPage();
-        signupLoginPage.setLoginEmail(createdEmail);
-        signupLoginPage.setPassword(createdPassword);
-        signupLoginPage.loginToHomePage();
+        loginAs(createdEmail, createdPassword);
         Assert.assertEquals(homePage.getLogoutText(),
                 "Logout", "You are not logged in!");
 

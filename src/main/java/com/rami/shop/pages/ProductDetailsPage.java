@@ -11,7 +11,7 @@ public class ProductDetailsPage extends BasePage {
     }
     private By productName = By.cssSelector(".product-information h2");
     private By productCategory = By.xpath("//div[@class='product-information']/p[contains(text(),'Category:')]");
-    private By productPrice = By.xpath("//div[@class='product-information']//span[normalize-space()='Rs. 500']");
+    private By productPrice = By.cssSelector(".product-information span span");
     private By quantityInput = By.id("quantity");
     private By addToCartButton = By.xpath("//div[@class='product-information']//button[normalize-space()='Add to cart']");
     private By modalTitle = By.xpath("//h4[contains(text(), 'Added!')]");
@@ -56,9 +56,4 @@ public class ProductDetailsPage extends BasePage {
         click(viewCartButton);
         return new CartPage();
     }
-
-
-
-
-
 }

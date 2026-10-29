@@ -2,7 +2,6 @@ package com.rami.shop.pages;
 
 import com.rami.shop.base.BasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -179,12 +178,12 @@ public void setMobileNumberField(String mobileNumber) {
     set(mobileNumberField, mobileNumber);
 }
 
-public accountCreatedPage clickCreateAccountButton() {
+public AccountCreatedPage clickCreateAccountButton() {
     scrollToElementJS(createAccountButton);
     WebDriverWait wait = new WebDriverWait(BasePage.getDriver(), Duration.ofSeconds(5));
     wait.until(ExpectedConditions.elementToBeClickable(createAccountButton));
     clickJs(createAccountButton);
-    return new accountCreatedPage();
+    return new AccountCreatedPage();
 }
 
 //Method for validation message

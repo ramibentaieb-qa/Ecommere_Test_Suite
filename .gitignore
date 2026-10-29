@@ -37,3 +37,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+created_user.properties
+.idea

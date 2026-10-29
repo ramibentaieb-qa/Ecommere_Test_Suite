@@ -6,6 +6,8 @@ import com.rami.shop.utils.TestDataProviders;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import static com.rami.shop.utils.TestUsers.EXISTING_EMAIL;
+import static com.rami.shop.utils.TestUsers.EXISTING_PASSWORD;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,8 +18,6 @@ import java.util.stream.Stream;
 
 public class CheckoutTest extends BaseTest {
 
-    private static final String EXISTING_EMAIL  = "michele@test.com";
-    private static final String EXISTING_PASSWORD  = "Michele123";
     int quantity = 5;
     private int expectedTotal;
 
@@ -53,11 +53,12 @@ public class CheckoutTest extends BaseTest {
     @BeforeMethod
     public void prepareCart() {
         homePage.goToSignupPage();
-        signupLoginPage.setLoginEmail(EXISTING_EMAIL);
-        signupLoginPage.setPassword(EXISTING_PASSWORD);
-        signupLoginPage.loginToHomePage();
+        loginAs(EXISTING_EMAIL, EXISTING_PASSWORD);
         homePage.goToProductsPage();
         productsPage.navigateToProductDetails(6);
+        int detailsPrice = Integer.parseInt(
+                productDetailsPage.getProductPrice().replaceAll("\\D", ""));
+
         productDetailsPage.setQuantity(quantity);
         Assert.assertEquals(productDetailsPage.getQuantity(), String.valueOf(quantity));
 
@@ -70,6 +71,7 @@ public class CheckoutTest extends BaseTest {
 
         Assert.assertEquals(cartPage.getQuantity(6),  String.valueOf(quantity));
         int price = cartPage.getPrice(6);
+        Assert.assertEquals(price, detailsPrice, "Cart price is different from the product page price");
         int total = cartPage.getTotal(6);
         Assert.assertEquals(total, price * quantity,
                 "Total price is incorrect");
@@ -109,10 +111,6 @@ public class CheckoutTest extends BaseTest {
         paymentPage.setExpiryMonth("02");
         paymentPage.setExpiryYear("2027");
         paymentPage.navigateToConfirmedPaymentPage();
-
-//        String EmptyField = paymentPage.getFieldValidationMessage();
-//        Assert.assertTrue(EmptyField.contains("Please"),
-//                "A field is empty");
 
         String ExpectedConfirmedPayment = "Order Placed!";
         Assert.assertEquals(confirmedPaymentPage.getConfirmationMessage(),  ExpectedConfirmedPayment.toUpperCase(),

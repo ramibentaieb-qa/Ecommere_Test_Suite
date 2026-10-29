@@ -2,7 +2,7 @@ package com.rami.shop.tests.auth;
 
 import com.rami.shop.base.BaseTest;
 import com.rami.shop.models.SignupData;
-import com.rami.shop.pages.accountCreatedPage;
+import com.rami.shop.pages.AccountCreatedPage;
 import com.rami.shop.utils.TestDataProviders;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -56,15 +56,13 @@ public class SignupTest extends BaseTest {
         signupPage.setMobileNumberField(data.address.mobileNumber);
         System.out.println("Current Page Title: " + driver.getTitle());
 
-        accountCreatedPage accountCreatedPage = signupPage.clickCreateAccountButton();
+        AccountCreatedPage accountCreatedPage = signupPage.clickCreateAccountButton();
 
         String actualTextMessage = accountCreatedPage.getAccountCreatedMessageText();
         String expectedTextMessage = "ACCOUNT CREATED!";
         Assert.assertEquals(
                 actualTextMessage, expectedTextMessage
         );
-
-        System.out.println(accountCreatedPage.getAccountCreatedMessageText());
 
         accountCreatedPage.clickContinueButton();
 

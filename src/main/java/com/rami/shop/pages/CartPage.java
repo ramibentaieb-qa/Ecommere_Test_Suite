@@ -2,6 +2,10 @@ package com.rami.shop.pages;
 
 import com.rami.shop.base.BasePage;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
+
 import static utilities.WaitUtility.*;
 
 import static utilities.JavaScriptUtility.scrollToElementJS;
@@ -74,14 +78,4 @@ public class CartPage extends BasePage {
         scrollToElementJS(totalOf(productId));
         return toNumber(find(totalOf(productId)).getText());
     }
-
-
-
-
-
-
-
-
-
-
 }

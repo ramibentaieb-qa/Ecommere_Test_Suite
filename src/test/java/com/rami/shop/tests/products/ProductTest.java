@@ -12,9 +12,7 @@ public class ProductTest extends BaseTest {
     public void addToCartTest() {
 
         homePage.goToSignupPage();
-        signupLoginPage.setLoginEmail(createdEmail);
-        signupLoginPage.setPassword(createdPassword);
-        signupLoginPage.loginToHomePage();
+        loginAs(createdEmail, createdPassword);
         Assert.assertEquals(homePage.getLogoutText(),
                 "Logout", "You are not logged in!");
 
@@ -45,18 +43,5 @@ public class ProductTest extends BaseTest {
 
         Assert.assertTrue(driver.getCurrentUrl().contains("/products"),
                 "you are not redirected back to products page");
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

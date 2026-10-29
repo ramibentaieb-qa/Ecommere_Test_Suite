@@ -3,7 +3,7 @@ package com.rami.shop.pages;
 import com.rami.shop.base.BasePage;
 import org.openqa.selenium.By;
 
-public class accountCreatedPage extends BasePage {
+public class AccountCreatedPage extends BasePage {
 
 
     protected By textMessage = By.xpath("//h2[@data-qa='account-created']");

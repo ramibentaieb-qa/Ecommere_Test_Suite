@@ -112,30 +112,10 @@ public class BaseTest {
         driver.quit();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    protected void loginAs(String email, String password) {
+        homePage.goToSignupPage();
+        signupLoginPage.setLoginEmail(email);
+        signupLoginPage.setPassword(password);
+        signupLoginPage.loginToHomePage();
+    }
 }
