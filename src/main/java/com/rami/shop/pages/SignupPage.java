@@ -4,6 +4,7 @@ import com.rami.shop.base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import static utilities.WaitUtility.*;
 
 import java.time.Duration;
 
@@ -62,6 +63,7 @@ private By firstInvalidField = By.cssSelector("input:invalid, select:invalid");
 
 
 public void ClickMaleRadioButton() {
+    explicitWaitUntilVisible(10, maleRadioButton);
     clickJs(maleRadioButton);
 }
 
@@ -71,6 +73,7 @@ public boolean isMaleRadioButtonSelected() {
 }
 
 public void ClickFemalesRadioButton() {
+    explicitWaitUntilVisible(10, femalesRadioButton);
     clickJs(femalesRadioButton);
 }
 
