@@ -6,7 +6,8 @@ import org.testng.annotations.Test;
 
 public class DeleteAccountTest extends BaseTest {
 
-    @Test(dependsOnMethods = "com.rami.shop.tests.auth.SignupTest.testSignupLogoutLogin")
+    @Test(dependsOnMethods = {"com.rami.shop.tests.auth.SignupTest.testSignupLogoutLogin",
+                                "com.rami.shop.tests.products.ProductTest.addToCartTest"})
     public void testDeleteAccount() {
 
         loginAs(createdEmail, createdPassword);

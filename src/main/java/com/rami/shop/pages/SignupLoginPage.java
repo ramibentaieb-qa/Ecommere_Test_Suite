@@ -2,6 +2,7 @@ package com.rami.shop.pages;
 
 import com.rami.shop.base.BasePage;
 import org.openqa.selenium.By;
+import static utilities.WaitUtility.*;
 
 public class SignupLoginPage extends BasePage {
     private By nameField = By.name("name");
@@ -47,6 +48,7 @@ public class SignupLoginPage extends BasePage {
     }
 
     public String getErrorLoginMessage() {
+        explicitWaitUntilVisible(5, errorLoginMessage);
         return find(errorLoginMessage).getText();
     }
 
