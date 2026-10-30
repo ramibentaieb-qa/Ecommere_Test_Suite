@@ -66,6 +66,10 @@ public class BaseTest {
                 EdgeOptions options = new EdgeOptions();
                 options.setExperimentalOption("prefs", prefs);
                 options.addArguments("--disable-notifications");
+                if (Boolean.getBoolean("headless")) {
+                    options.addArguments("--headless=new", "--no-sandbox",
+                            "--disable-dev-shm-usage", "--window-size=1920,1080");
+                }
                 driver = new EdgeDriver(options);
         } else {
                 throw  new Exception("Incorrect Browser");

@@ -22,6 +22,9 @@ jobs:
       - name: Run Maven Test Command
         run: mvn clean test -Dheadless=true
 
+      - name: Run cross-browser suite
+        run: mvn test -Dsurefire.suiteXmlFiles=src/test/resources/cross-browser.xml -Dheadless=true
+
       - name: Upload screenshots
         if: failure()
         uses: actions/upload-artifact@v4

@@ -1,3 +1,5 @@
+[![Selenium Java CI with Maven](https://github.com/ramibentaieb-qa/Ecommere_Test_Suite/actions/workflows/maven.yml/badge.svg)](https://github.com/ramibentaieb-qa/Ecommere_Test_Suite/actions/workflows/maven.yml)
+
 # Ecommerce test suite
 
 I built this project to learn test automation. It tests the demo shop at https://automationexercise.com/ using Java, Selenium and TestNG.
