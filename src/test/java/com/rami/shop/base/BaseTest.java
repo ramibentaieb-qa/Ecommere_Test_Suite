@@ -75,7 +75,10 @@ public class BaseTest {
                 throw  new Exception("Incorrect Browser");
             }
 
-        driver.manage().window().maximize();
+        if (!Boolean.getBoolean("headless")) {
+            driver.manage().window().maximize();
+        }
+
         driver.get(url);
         basePage = new BasePage();
         BasePage.setDriver(driver);
