@@ -14,7 +14,7 @@ public class DownloadUtility {
     }
 
     public static String readDownloadFile(int seconds) throws Exception {
-        long deadline = System.currentTimeMillis() + seconds + 1000L;
+        long deadline = System.currentTimeMillis() + seconds * 1000L;
 
         while (System.currentTimeMillis() < deadline) {
             try (Stream<Path> files = Files.list(DOWNLOAD_FOLDER)) {

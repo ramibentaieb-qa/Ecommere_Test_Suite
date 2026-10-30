@@ -44,7 +44,7 @@ public class BaseTest {
     @BeforeMethod
     @Parameters("browser")
     public void setUp(@Optional("chrome")String browser) throws Exception {
-            Path downloadPath = DownloadUtility.getDownloadFolder();
+            Path downloadPath = prepareDownloadFolder();
             Map<String, Object> prefs = buildPrefs(downloadPath);
 
             if (browser.equalsIgnoreCase("chrome")) {
@@ -89,7 +89,7 @@ public class BaseTest {
     }
 
     private Path prepareDownloadFolder() throws Exception {
-        Path downloadPath = Paths.get("target", "downloads").toAbsolutePath();
+        Path downloadPath = DownloadUtility.getDownloadFolder();
         Files.createDirectories(downloadPath);
         try (var files = Files.list(downloadPath)) {
             for (Path f : files.toList()) Files.delete(f);
