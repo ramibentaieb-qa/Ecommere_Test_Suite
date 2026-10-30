@@ -2,6 +2,7 @@ package com.rami.shop.pages;
 
 import com.rami.shop.base.BasePage;
 import org.openqa.selenium.By;
+import static utilities.WaitUtility.*;
 
 public class HomePage  extends BasePage {
 
@@ -36,6 +37,7 @@ public String getUsernameText() {
 
 
 public ProductsPage goToProductsPage() {
+    explicitWaitUntilClickable(2,productButton);
     click(productButton);
     return new ProductsPage();
 }

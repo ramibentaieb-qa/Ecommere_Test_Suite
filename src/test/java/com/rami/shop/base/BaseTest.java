@@ -10,6 +10,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
+import utilities.DownloadUtility;
 import utilities.Utility;
 
 import java.nio.file.Files;
@@ -45,7 +46,7 @@ public class BaseTest {
     @BeforeMethod
     @Parameters("browser")
     public void setUp(@Optional("chrome")String browser) throws Exception {
-            Path downloadPath = prepareDownloadFolder();
+            Path downloadPath = DownloadUtility.getDownloadFolder();
             Map<String, Object> prefs = buildPrefs(downloadPath);
 
             if (browser.equalsIgnoreCase("chrome")) {

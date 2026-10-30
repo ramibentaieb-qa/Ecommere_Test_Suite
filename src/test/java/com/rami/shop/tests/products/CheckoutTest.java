@@ -6,8 +6,11 @@ import com.rami.shop.utils.TestDataProviders;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import utilities.DownloadUtility;
+
 import static com.rami.shop.utils.TestUsers.EXISTING_EMAIL;
 import static com.rami.shop.utils.TestUsers.EXISTING_PASSWORD;
+import static utilities.DownloadUtility.*;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -21,29 +24,12 @@ public class CheckoutTest extends BaseTest {
     int quantity = 5;
     private int expectedTotal;
 
-    private void verifyInvoiceContent(int expectedAmount) throws Exception {
-        Path downloadPath = Paths.get("target","downloads").toAbsolutePath();
-        Path invoiceFile = null;
-        long deadline = System.currentTimeMillis() + 15000;
+    private void verifyInvoiceContent(String customerName, int expectedAmount) throws Exception {
 
-        while (System.currentTimeMillis() < deadline) {
-            try (Stream<Path> files = Files.list(downloadPath)) {
-                invoiceFile = files
-                        .filter(Files::isRegularFile)
-                        .filter(file -> !file.getFileName().toString().endsWith(".crdownload"))
-                        .findFirst()
-                        .orElse(null);
-            }
-            if (invoiceFile != null) {
-                break;
-            }
-            Thread.sleep(500);
-        }
+        String invoiceContent = DownloadUtility.readDownloadFile(15);
 
-        Assert.assertNotNull(invoiceFile, "Invoice was not downloaded");
-        String invoiceContent = Files.readString(invoiceFile);
         Assert.assertTrue(
-                invoiceContent.contains("Hi Johana Doe"), "Customer name was not found in the invoice."
+                invoiceContent.contains("Hi " + customerName), "Customer name was not found in the invoice."
         );
         Assert.assertTrue(
                 invoiceContent.contains(String.valueOf(expectedAmount)), "Total purchase amount was not found in the invoice."
@@ -117,7 +103,7 @@ public class CheckoutTest extends BaseTest {
                 "Confirmation message is not shown");
 
         confirmedPaymentPage.downloadInvoice();
-        verifyInvoiceContent(expectedTotal);
+        verifyInvoiceContent(data.address.firstName + " " + data.address.lastName, expectedTotal);
 
         confirmedPaymentPage.backToHomePage();
 
