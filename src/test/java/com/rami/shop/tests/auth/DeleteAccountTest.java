@@ -9,7 +9,6 @@ public class DeleteAccountTest extends BaseTest {
     @Test(dependsOnMethods = "com.rami.shop.tests.auth.SignupTest.testSignupLogoutLogin")
     public void testDeleteAccount() {
 
-        homePage.goToSignupPage();
         loginAs(createdEmail, createdPassword);
         Assert.assertEquals(homePage.getLogoutText(),
                 "Logout", "You are not logged in!");

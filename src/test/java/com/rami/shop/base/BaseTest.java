@@ -51,6 +51,10 @@ public class BaseTest {
                 ChromeOptions options = new ChromeOptions();
                 options.setExperimentalOption("prefs", prefs);
                 options.addArguments("--disable-notifications");
+                if (Boolean.getBoolean("headless")) {
+                    options.addArguments("--headless=new", "--no-sandbox",
+                            "--disable-dev-shm-usage", "--window-size=1920,1080");
+                }
 
                 ChromeDriver chrome = new ChromeDriver(options);
                 chrome.executeCdpCommand("Network.enable", new HashMap<>());
@@ -116,5 +120,6 @@ public class BaseTest {
         signupLoginPage.setLoginEmail(email);
         signupLoginPage.setPassword(password);
         signupLoginPage.loginToHomePage();
+        homePage.waitUntilLoggedIn();
     }
 }

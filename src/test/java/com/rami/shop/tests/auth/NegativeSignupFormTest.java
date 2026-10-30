@@ -10,13 +10,10 @@ import org.testng.annotations.Test;
 public class NegativeSignupFormTest extends BaseTest {
 
     @Test(dataProvider = "signupDataProvider", dataProviderClass = TestDataProviders.class)
-    public void testSignupLogoutLogin(SignupData data) {
+    public void testSignupWithEmptyPassword(SignupData data) {
 
       String email = System.currentTimeMillis() + "_" + data.email;
       String password = System.currentTimeMillis() + "_" + data.password;
-
-      createdEmail = email;
-      createdPassword = password;
 
 //Step 1: Signup Page
       homePage.goToSignupPage();

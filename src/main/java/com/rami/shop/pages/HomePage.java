@@ -22,6 +22,10 @@ public SignupLoginPage logoutToSignupPage() {
     return new SignupLoginPage();
 }
 
+public void waitUntilLoggedIn() {
+    explicitWaitUntilVisible(10, logoutButton);
+}
+
 public DeleteAccountPage goToDeleteAccountPage() {
     click(deleteAcountButton);
     return new DeleteAccountPage();

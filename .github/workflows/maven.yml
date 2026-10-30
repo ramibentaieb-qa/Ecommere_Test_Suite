@@ -20,4 +20,11 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Run Maven Test Command
-        run: mvn clean test
+        run: mvn clean test -Dheadless=true
+
+      - name: Upload screenshots
+        if: failure()
+        uses: actions/upload-artifact@4
+        with:
+          name: screenshots
+          path: target/screenshots

@@ -9,7 +9,6 @@ public class LoginTest extends BaseTest {
     @Test(dependsOnMethods = "com.rami.shop.tests.auth.SignupTest.testSignupLogoutLogin")
     public void testLoginFeature() {
 
-        homePage.goToSignupPage();
         loginAs(createdEmail, createdPassword);
         Assert.assertEquals(homePage.getLogoutText(),
                 "Logout", "You are not logged in!");
