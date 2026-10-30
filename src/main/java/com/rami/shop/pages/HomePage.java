@@ -37,14 +37,7 @@ public String getUsernameText() {
 
 
 public ProductsPage goToProductsPage() {
-    explicitWaitUntilClickable(2,productButton);
     click(productButton);
     return new ProductsPage();
 }
-
-
-
-
-
-
 }

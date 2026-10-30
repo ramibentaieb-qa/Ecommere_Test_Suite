@@ -6,10 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 import utilities.DownloadUtility;
 import utilities.Utility;
 
@@ -22,6 +19,7 @@ import java.util.Map;
 
 import static com.rami.shop.base.BasePage.delay;
 
+@Listeners(com.rami.shop.utils.TestListener.class)
 public class BaseTest {
 
     protected static WebDriver driver;
