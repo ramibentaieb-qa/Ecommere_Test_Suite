@@ -50,7 +50,7 @@ Tests that need an account from `SignupTest` must run in the same run as `Signup
 
 When a test fails, a screenshot is saved in `target/screenshots`. On GitHub Actions the same screenshots are uploaded with the failed run.
 
-The workflow runs the whole suite in headless Chrome. Then it runs the checkout test in Chrome and in Edge.
+The workflow runs the whole suite in headless Chrome.
 
 ## Things I know are not great yet
 
