@@ -42,7 +42,7 @@ You need Java 25, Maven and Chrome. Edge is optional.
 - Without a browser window: add `-Dheadless=true`
 - Chrome and Edge: `mvn test -Dsurefire.suiteXmlFiles=src/test/resources/cross-browser.xml`
 
-In IntelliJ you can also right-click a test and run it. In Windows PowerShell, put quotes around each `-D` option that has a dot in it, like `"-Dsurefire.suiteXmlFiles=src/test/resources/cross-browser.xml"`.
+In IntelliJ, you can also right-click a test and run it. In Windows PowerShell, put quotes around each `-D` option that has a dot in it, like `"-Dsurefire.suiteXmlFiles=src/test/resources/cross-browser.xml"`.
 
 Tests that need an account from `SignupTest` must run in the same run as `SignupTest`.
 
@@ -51,6 +51,8 @@ Tests that need an account from `SignupTest` must run in the same run as `Signup
 When a test fails, a screenshot is saved in `target/screenshots`. On GitHub Actions the same screenshots are uploaded with the failed run.
 
 The workflow runs the whole suite in headless Chrome.
+
+HTML test report is uploaded as an artifact on every CI run
 
 ## Things I know are not great yet
 
@@ -65,9 +67,7 @@ The workflow runs the whole suite in headless Chrome.
 ## What I want to do next
 
 - Make each test run on its own.
-- Add a test report.
 - Run tests in parallel.
-- Add more tests: search, product details and the contact form.
 
 ## Feedback
 
