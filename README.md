@@ -56,7 +56,6 @@ The workflow runs the whole suite in headless Chrome.
 
 - The tests are not fully independent. `LoginTest`, `ProductTest` and `DeleteAccountTest` need `SignupTest` to run first, because they use the account it creates. `DeleteAccountTest` has to run last, because it deletes that account.
 - The checkout test logs in with one account I made by hand. Its email and password are in a small `TestUsers` class.
-- One fixed pause is left, a 4 second wait after each test. I plan to remove it.
 - The driver is shared between the page objects, so tests cannot run in parallel.
 - There is no HTML test report, only the screenshots and the console output.
 - Ad blocking works only in Chrome. In Edge, an ad can still get in the way.
@@ -66,7 +65,6 @@ The workflow runs the whole suite in headless Chrome.
 ## What I want to do next
 
 - Make each test run on its own.
-- Remove the last fixed pause.
 - Add a test report.
 - Run tests in parallel.
 - Add more tests: search, product details and the contact form.

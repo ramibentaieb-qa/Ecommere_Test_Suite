@@ -118,7 +118,7 @@ public class BaseTest {
 
     @AfterMethod
     public void teardown() {
-        delay(4000);
+        delay(2000);
         driver.quit();
     }
 
