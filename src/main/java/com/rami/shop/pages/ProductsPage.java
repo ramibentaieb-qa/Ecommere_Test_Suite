@@ -13,8 +13,6 @@ import static utilities.WaitUtility.*;
 
 public class ProductsPage extends BasePage {
 
-    private By singleProduct = By.cssSelector("//h2[@data-qa='single-product']");
-//    private By addToCart = By.cssSelector("a[data-product-id='2']");
     private By addToCartButton(int productId) {
         return By.cssSelector(".productinfo a[data-product-id='" + productId + "']");
     }
@@ -38,17 +36,15 @@ public class ProductsPage extends BasePage {
     private By categorySearchedTitle = By.xpath("//h2[normalize-space()='Women - Dress Products']");
     private By categoryResultName = By.cssSelector(".features_items .productinfo p");
 
-    private By brandProducts(String brandName) {
+    private By brandLink(String brandName) {
         return By.cssSelector("a[href='/brand_products/" + brandName + "']");
     }
-    private By brandSearchedTitle = By.xpath("//h2[normalize-space()='Brand - Madame Products']");
+    private By brandTitle(String brandName) {
+        return By.xpath("//h2[normalize-space()='Brand - " + brandName + " Products']");
+    }
     private By productList = By.cssSelector(".features_items .product-image-wrapper");
 
 
-
-    public boolean getSingleProduct() {
-        return find(singleProduct).isDisplayed();
-    }
 
     public void addProductToCart(int productId) {
         scrollToElementJS(addToCartButton(productId));
@@ -119,41 +115,18 @@ public class ProductsPage extends BasePage {
         return categoryNames;
     }
 
-//    public void selectABrand(String brand) {
-//        scrollToElementJS(brandProducts);
-//        clickJs(brandProducts);
-//    }
-
-    public String getBrandTitle() {
-        return find(brandSearchedTitle).getText();
-    }
-
-    public Map<String, Integer> getAllBrands(String brandName) {
-        Map<String, Integer> brands = new LinkedHashMap<>();
-
-        List<WebElement> elements = driver.findElements(brandProducts(brandName));
-
-        for (WebElement element : elements) {
-            String brandUrl = element.getAttribute("href");
-            String countText = element.findElement(By.tagName("span")).getText();
-
-            int expectedCount = Integer.parseInt(
-                    countText.replaceAll("[^0-9]", "")
-            );
-            brands.put(brandUrl, expectedCount);
-        }
-        return brands;
+    public int getBrandCount(String brandName) {
+        String text = find(brandLink(brandName)).findElement(By.tagName("span")).getText();
+        return Integer.parseInt(text.replaceAll("[^0-9]", ""));
     }
 
     public void clickBrand(String brandName) {
-        scrollToElementJS(brandProducts(brandName));
-        click(brandProducts(brandName));
+        scrollToElementJS(brandLink(brandName));
+        click(brandLink(brandName));
+        explicitWaitUntilVisible(10, brandTitle(brandName));
     }
 
     public int getDisplayedProductsCount() {
         return driver.findElements(productList).size();
     }
-
-
-
 }
